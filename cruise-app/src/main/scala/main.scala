@@ -57,4 +57,9 @@ case class CabinPrice(cabinCode: String,
 case class BestGroupPrice(cabinCode: String,
                           rateCode: String,
                           price: BigDecimal,
-                          rateGroup: String)
+                          rateGroup: String) {
+  override def toString: String = {
+    val priceFormatted = f"$price%.2f"
+    s"BestGroupPrice($cabinCode, $rateCode, $priceFormatted, $rateGroup)"
+  }
+}
