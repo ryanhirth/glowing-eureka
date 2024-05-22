@@ -27,7 +27,9 @@ def main(): Unit = {
     CabinPrice(CB, S2, 270.00)
   )
   var result = getBestGroupPrices(rates, cabinPrices)
-  println(result)
+  for (bestGroupPrice <- result) {
+    println(bestGroupPrice)
+  }
 }
 
 def getBestGroupPrices(rates: Seq[Rate],
