@@ -35,7 +35,10 @@ def getBestGroupPrices(rates: Seq[Rate],
 // first converting the list of cabin prices to a list of group prices
   var groupPrices = prices.map(cabinPrice => BestGroupPrice(cabinPrice.cabinCode, cabinPrice.rateCode, cabinPrice.price, rates.find(rate => rate.rateCode == cabinPrice.rateCode).get.rateGroup))
 // group the group prices by cabin code and rate group for lowest price
-var bestGroupPrices = groupPrices.groupBy(groupPrice => (groupPrice.cabinCode, groupPrice.rateGroup))
+var bestGroupPrices = groupPrices
+  .groupBy(groupPrice => (groupPrice.cabinCode, groupPrice.rateGroup))
+  .map { case (grouping, priceGroupObjects) => priceGroupObjects.minBy(groupPrice => groupPrice.price) }
+
   return Seq()
 }
 case class Rate(rateCode: String, rateGroup: String)
