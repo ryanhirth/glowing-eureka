@@ -47,7 +47,6 @@ def getBestGroupPrices(rates: Seq[Rate],
       best.cabinCode == groupPrice.cabinCode
         && best.rateCode == groupPrice.rateCode
         && best.price == groupPrice.price))
-//  return bestGroupPrices.toSeq
 }
 case class Rate(rateCode: String, rateGroup: String)
 case class CabinPrice(cabinCode: String,
