@@ -11,9 +11,9 @@ val CB: String = "CB"
 def main(): Unit = {
   println("Hello world, first to find the best price for each rate group!")
   var rates = Seq(
-    Rate(M1, Military),     
+    Rate(M1, Military),
     Rate(M2, Military),
-    Rate(S1, Senior), 
+    Rate(S1, Senior),
     Rate(S2, Senior)
   )
   var cabinPrices = Seq(
@@ -32,8 +32,11 @@ def main(): Unit = {
 
 def getBestGroupPrices(rates: Seq[Rate],
                        prices: Seq[CabinPrice]): Seq[BestGroupPrice] = {
-  
-return Seq()
+// first converting the list of cabin prices to a list of group prices
+  var groupPrices = prices.map(cabinPrice => BestGroupPrice(cabinPrice.cabinCode, cabinPrice.rateCode, cabinPrice.price, rates.find(rate => rate.rateCode == cabinPrice.rateCode).get.rateGroup))
+// group the group prices by cabin code and rate group for lowest price
+var bestGroupPrices = groupPrices.groupBy(groupPrice => (groupPrice.cabinCode, groupPrice.rateGroup))
+  return Seq()
 }
 case class Rate(rateCode: String, rateGroup: String)
 case class CabinPrice(cabinCode: String,
