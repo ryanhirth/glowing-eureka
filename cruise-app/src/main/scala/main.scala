@@ -35,5 +35,33 @@ def main(): Unit = {
   for (bestGroupPrice <- result) {
     println(bestGroupPrice)
   }
+
+  val list = List(1, 2, 3,4)
+  val result3 = permutations(list)
+  result3.foreach(println)
+
+  // Example usage:
+  /*val list = List(1, 2, 3, 4)
+  val k = 3
+  val result2 = combinations(list, k)
+  result2.foreach(println)*/
+  /*var newList = List(1,2) ::: List(3,4)
+  var doubleList = List(5,6) :: List(7,8)
+  println(newList)
+  println(doubleList)*/
 }
+/*
+def combinations[T](list: List[T], k: Int): List[List[T]] = {
+  if (k == 0) List(Nil) // Base case: If k is 0, return a list containing an empty list
+  else if (list.isEmpty) Nil // Base case: If the input list is empty, return an empty list
+  else {
+    // Recursive step:
+    // Either include the head element in the combination and find combinations for the rest of the list,
+    // or exclude the head element and find combinations for the rest of the list.
+    combinations(list.tail, k - 1).map(list.head :: _) ++ combinations(list.tail, k)
+  }
+}
+ */
+
+
 
