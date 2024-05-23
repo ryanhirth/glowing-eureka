@@ -12,7 +12,7 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
   var promotionOrders = permutations(list)
 
   // 3 - for each permutation, going through each list in order, remove promotions that can't be combined
-  var promotionCombos = ListBuffer[PromotionCombo]()
+  var promotionCombos = ListBuffer[Seq[String]]()
   for (promotionOrder <- promotionOrders) {
     var promotionComboStrings = ListBuffer[String]()
     for (index <- promotionOrder) {
@@ -23,15 +23,19 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
         promotionComboStrings += code
       }
     }
-    promotionCombos += PromotionCombo(promotionComboStrings.toSeq)
+    promotionCombos += promotionComboStrings.toSeq
   }
 
   // 4 - order list and get distinct list without duplicates
   var x = 5
-  println(promotionCombos)
+  //println(promotionCombos)
   /*promotionCombos.flatMap { promotionCombo =>
-
+    promotionCombo.promotionCodes
   }*/
+  //var sorted = promotionCombos.sorted
+  var sortByHead = promotionCombos.map(c => c.sorted).distinct//.sortBy(_.head)
+  var y = 87
+  println(sortByHead)
 
   return Seq()
 }
