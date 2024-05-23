@@ -50,23 +50,15 @@ def main(): Unit = {
   var promotionsResult = allCombinablePromotions(rules)
   println(promotionsResult)
 
+  println("Promotion Combinations for promotionCode=P1")
+  var p1Promotions = combinablePromotions(P1, rules)
+  println(p1Promotions)
+
   println("Promotion Combinations for promotionCode=P3")
   var p3Promotions = combinablePromotions(P3, rules)
   println(p3Promotions)
 
 }
-/*
-def combinations[T](list: List[T], k: Int): List[List[T]] = {
-  if (k == 0) List(Nil) // Base case: If k is 0, return a list containing an empty list
-  else if (list.isEmpty) Nil // Base case: If the input list is empty, return an empty list
-  else {
-    // Recursive step:
-    // Either include the head element in the combination and find combinations for the rest of the list,
-    // or exclude the head element and find combinations for the rest of the list.
-    combinations(list.tail, k - 1).map(list.head :: _) ++ combinations(list.tail, k)
-  }
-}
- */
 
 
 

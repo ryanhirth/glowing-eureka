@@ -28,16 +28,8 @@ def allPromotionPermutations(allPromotions: Seq[Promotion]): ListBuffer[Seq[Stri
 }
 def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
 = {
-
   var promotionPermutations = allPromotionPermutations(allPromotions)
-
-  // 4 - order list and get distinct list without duplicates
-  var x = 5
-  //println(promotionCombos)
-  /*promotionCombos.flatMap { promotionCombo =>
-    promotionCombo.promotionCodes
-  }*/
-  //var sorted = promotionCombos.sorted
+  // order list and get distinct list without duplicates
   var allSortedWithoutDuplicates = promotionPermutations.map(c => c.sorted).distinct
   return allSortedWithoutDuplicates.map(list => PromotionCombo(list)).toSeq
 }
@@ -54,14 +46,6 @@ def combinablePromotions(
   return permutationsThatStartWithPromoCode.map(list => PromotionCombo(list)).toSeq
 }
 
-def makeUpList(size: Int): List[Int] = {
-  var list = ListBuffer[Int]()
-  for (i <- 0 until size) {
-    list += i
-  }
-  return list.toList
-}
-
 def permutations(list: List[Int]): List[List[Int]] = {
   if (list.isEmpty) {
     List(Nil)
@@ -75,14 +59,4 @@ def permutations(list: List[Int]): List[List[Int]] = {
   }
 }
 
-
-/*def combinePromotionsByIndex(index: Int, combinedPromotions: PromotionCombo, allPromotions: Seq[Promotion]): Unit = {
-  if (index > allPromotions.length) {
-    return
-  }
-  if (combinedPromotions.promotionCodes.isEmpty) {
-    var combo = combinedPromotions.promotionCodes.concat(allPromotions.apply(index).code)
-  }
-  return
-}*/
 
