@@ -2,8 +2,7 @@ import scala.collection.mutable.ListBuffer
 
 case class Promotion(code: String, notCombinableWith: Seq[String])
 case class PromotionCombo(promotionCodes: Seq[String])
-def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
-= {
+def allPromotionPermutations(allPromotions: Seq[Promotion]): ListBuffer[Seq[String]] = {
   // 1 - create a numbered list for the amount of promotions
   // (ex: for 5 promotions List(0,1,2,3,4) )
   var list = allPromotions.indices.toList //makeUpList(allPromotions.length)
@@ -25,6 +24,12 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
     }
     promotionCombos += promotionComboStrings.toSeq
   }
+  return promotionCombos
+}
+def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
+= {
+
+  var promotionPermutations = allPromotionPermutations(allPromotions)
 
   // 4 - order list and get distinct list without duplicates
   var x = 5
@@ -33,14 +38,20 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
     promotionCombo.promotionCodes
   }*/
   //var sorted = promotionCombos.sorted
-  var allSortedWithoutDuplicates = promotionCombos.map(c => c.sorted).distinct
+  var allSortedWithoutDuplicates = promotionPermutations.map(c => c.sorted).distinct
   return allSortedWithoutDuplicates.map(list => PromotionCombo(list)).toSeq
 }
 
 def combinablePromotions(
                           promotionCode: String,
                           allPromotions: Seq[Promotion]): Seq[PromotionCombo] = {
-  return Seq()
+  var promotionPermutations = allPromotionPermutations(allPromotions)
+  var permutationsThatStartWithPromoCode = promotionPermutations
+    .filter(p => p.head == promotionCode)
+    .map(c => c.head +: c.tail.sorted)
+    .distinct
+
+  return permutationsThatStartWithPromoCode.map(list => PromotionCombo(list)).toSeq
 }
 
 def makeUpList(size: Int): List[Int] = {

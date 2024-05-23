@@ -37,7 +37,7 @@ def main(): Unit = {
   }
 
   println("==================================================")
-  println("Now finding list of combinable promotions.")
+  println("Now finding list of all combinable promotions.")
 
   var rules = Seq(
     Promotion(P1, Seq(P3)), // P1 is not combinable with P3
@@ -49,6 +49,10 @@ def main(): Unit = {
 
   var promotionsResult = allCombinablePromotions(rules)
   println(promotionsResult)
+
+  println("Promotion Combinations for promotionCode=P3")
+  var p3Promotions = combinablePromotions(P3, rules)
+  println(p3Promotions)
 
 }
 /*
