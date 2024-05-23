@@ -33,11 +33,8 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
     promotionCombo.promotionCodes
   }*/
   //var sorted = promotionCombos.sorted
-  var sortByHead = promotionCombos.map(c => c.sorted).distinct//.sortBy(_.head)
-  var y = 87
-  println(sortByHead)
-
-  return Seq()
+  var allSortedWithoutDuplicates = promotionCombos.map(c => c.sorted).distinct
+  return allSortedWithoutDuplicates.map(list => PromotionCombo(list)).toSeq
 }
 
 def combinablePromotions(

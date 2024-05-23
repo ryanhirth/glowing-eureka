@@ -48,20 +48,8 @@ def main(): Unit = {
   )
 
   var promotionsResult = allCombinablePromotions(rules)
+  println(promotionsResult)
 
-  /*val list = makeUpList(5) //List(1, 2, 3,4)
-  val result3 = permutations(list)
-  result3.foreach(println)*/
-
-  // Example usage:
-  /*val list = List(1, 2, 3, 4)
-  val k = 3
-  val result2 = combinations(list, k)
-  result2.foreach(println)*/
-  /*var newList = List(1,2) ::: List(3,4)
-  var doubleList = List(5,6) :: List(7,8)
-  println(newList)
-  println(doubleList)*/
 }
 /*
 def combinations[T](list: List[T], k: Int): List[List[T]] = {
