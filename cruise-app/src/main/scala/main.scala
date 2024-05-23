@@ -31,14 +31,27 @@ def main(): Unit = {
     CabinPrice(CB, S1, 245.00),
     CabinPrice(CB, S2, 270.00)
   )
-  var result = getBestGroupPrices(rates, cabinPrices)
-  for (bestGroupPrice <- result) {
+  var bestPriceResult = getBestGroupPrices(rates, cabinPrices)
+  for (bestGroupPrice <- bestPriceResult) {
     println(bestGroupPrice)
   }
 
-  val list = List(1, 2, 3,4)
+  println("==================================================")
+  println("Now finding list of combinable promotions.")
+
+  var rules = Seq(
+    Promotion(P1, Seq(P3)), // P1 is not combinable with P3
+    Promotion(P2, Seq(P4, P5)), // P2 is not combinable with P4 and P5
+    Promotion(P3, Seq(P1)), // P3 is not combinable with P1
+    Promotion(P4, Seq(P2)), // P4 is not combinable with P2
+    Promotion(P5, Seq(P2)) // P5 is not combinable with P2
+  )
+
+  var promotionsResult = allCombinablePromotions(rules)
+
+  /*val list = makeUpList(5) //List(1, 2, 3,4)
   val result3 = permutations(list)
-  result3.foreach(println)
+  result3.foreach(println)*/
 
   // Example usage:
   /*val list = List(1, 2, 3, 4)

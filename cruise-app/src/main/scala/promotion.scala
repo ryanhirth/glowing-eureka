@@ -1,7 +1,34 @@
+import scala.collection.mutable.ListBuffer
+
 case class Promotion(code: String, notCombinableWith: Seq[String])
 case class PromotionCombo(promotionCodes: Seq[String])
 def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
 = {
+  // 1 - create a numbered list for the amount of promotions
+  // (ex: for 5 promotions List(0,1,2,3,4) )
+  var list = makeUpList(allPromotions.length)
+
+  // 2 - get all permutations for all the different orders that these promotions can be applied
+  var promotionOrders = permutations(list)
+
+  // 3 - for each permutation, going through each list in order, remove promotions that can't be combined
+  var promotionCombos = ListBuffer[PromotionCombo]()
+  for (promotionOrder <- promotionOrders) {
+    var promotionComboStrings = ListBuffer[String]()
+    for (index <- promotionOrder) {
+      var code = allPromotions.apply(index).code
+      var notCombinable = allPromotions.apply(index).notCombinableWith
+      if (!promotionComboStrings.exists(notCombinable.contains)) {
+        // As long as a promotion in the not combinable list has not been applied this promotion can be added
+        promotionComboStrings += code
+      }
+    }
+    promotionCombos += PromotionCombo(promotionComboStrings.toSeq)
+  }
+
+  // 4 - order list and get distinct list without duplicates
+  var x = 5
+
   return Seq()
 }
 
@@ -12,12 +39,11 @@ def combinablePromotions(
 }
 
 def makeUpList(size: Int): List[Int] = {
-  var sequence = Seq()
-  for (i <- 0 to size) {
-    sequence ::: i
-    //list = list.concat(i)
+  var list = ListBuffer[Int]()
+  for (i <- 0 until size) {
+    list += i
   }
-  return sequence.toList
+  return list.toList
 }
 
 def permutations(list: List[Int]): List[List[Int]] = {
