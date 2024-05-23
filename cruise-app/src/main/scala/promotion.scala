@@ -6,7 +6,7 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
 = {
   // 1 - create a numbered list for the amount of promotions
   // (ex: for 5 promotions List(0,1,2,3,4) )
-  var list = makeUpList(allPromotions.length)
+  var list = allPromotions.indices.toList //makeUpList(allPromotions.length)
 
   // 2 - get all permutations for all the different orders that these promotions can be applied
   var promotionOrders = permutations(list)
@@ -28,6 +28,10 @@ def allCombinablePromotions(allPromotions: Seq[Promotion]): Seq[PromotionCombo]
 
   // 4 - order list and get distinct list without duplicates
   var x = 5
+  println(promotionCombos)
+  /*promotionCombos.flatMap { promotionCombo =>
+
+  }*/
 
   return Seq()
 }
